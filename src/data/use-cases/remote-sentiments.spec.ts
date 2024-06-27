@@ -103,4 +103,17 @@ describe("RemoteSentiments", () => {
 
     expect(httpResponse).toEqual(sentimentResponse);
   });
+
+  it("should calls the HttpPostClient with the provided config", async () => {
+    const { sut, httpPostClientSpy } = makeSut();
+    const sentiments = mockSentiments();
+
+    await sut.postSentiments(sentiments);
+
+    expect(httpPostClientSpy.config).toEqual({
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  });
 });
