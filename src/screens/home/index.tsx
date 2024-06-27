@@ -10,9 +10,11 @@ import { FontAwesome } from "@expo/vector-icons";
 import { styles } from "./styles";
 import { Sentiments } from "../../components/sentiments";
 import { Sentiment } from "../../utils/sentiments";
-import axios from "axios";
 import { SentimentResponse } from "../../types";
-import { API_KEY } from "@env";
+import { API_KEY, API_URL } from "@env";
+import { RemoteSentiments } from "@/data/use-cases/remote-sentiments";
+import { RemoteHttpPostClient } from "@/data/use-cases/http-post-client";
+import { SentimentsParams } from "@/domain/use-cases";
 
 export const Home = () => {
   const [score, setScore] = useState<Sentiment | null>(null);
@@ -29,17 +31,16 @@ export const Home = () => {
       formData.append("txt", message);
       formData.append("lang", "pt");
 
-      const response = await axios.post<SentimentResponse>(
-        "https://api.meaningcloud.com/sentiment-2.1",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const httpPostClient = new RemoteHttpPostClient<
+        SentimentsParams,
+        SentimentResponse
+      >();
 
-      setScore(response.data.score_tag);
+      const remoteSentiments = new RemoteSentiments(API_URL, httpPostClient);
+
+      const response = await remoteSentiments.postSentiments(formData);
+
+      setScore(response.score_tag);
     } catch (error) {
     } finally {
       setIsLoading(false);

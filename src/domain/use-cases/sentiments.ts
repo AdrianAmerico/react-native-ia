@@ -1,8 +1,6 @@
 import { SentimentResponse } from "@/types";
 
-export interface SentimentsParams {
-  text: string;
-}
+export type SentimentsParams = FormData;
 
 export interface Sentiments {
   postSentiments(text: SentimentsParams): Promise<SentimentResponse>;
