@@ -12,10 +12,15 @@ export class RemoteSentiments implements Sentiments {
     >
   ) {}
 
-  async postSentiments(params: SentimentsParams): Promise<SentimentResponse> {
+  async postSentiments(formData: SentimentsParams): Promise<SentimentResponse> {
     const HTTPResponse = await this.httpPostClient.post({
       url: this.url,
-      body: params,
+      body: formData,
+      config: {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
     });
 
     switch (HTTPResponse.statusCode) {
