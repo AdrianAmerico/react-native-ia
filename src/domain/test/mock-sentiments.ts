@@ -3,9 +3,15 @@ import { SentimentsParams } from "../use-cases/sentiments";
 import { SentimentResponse } from "@/types";
 import { sentiments } from "@/utils";
 
-export const mockSentiments = (): SentimentsParams => ({
-  text: faker.lorem.sentence(),
-});
+export const mockSentiments = (): SentimentsParams => {
+  const formData = new FormData();
+
+  formData.append("key", faker.lorem.word());
+  formData.append("lang", faker.lorem.word());
+  formData.append("txt", faker.lorem.sentence());
+
+  return formData;
+};
 
 export const mockSentimentsResponse = (): SentimentResponse => ({
   subjectivity: faker.lorem.word(),
