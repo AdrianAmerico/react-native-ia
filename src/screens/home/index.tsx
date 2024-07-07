@@ -9,17 +9,14 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { styles } from "./styles";
 import { Sentiments } from "../../components/sentiments";
-import { Sentiment } from "../../utils/sentiments";
-import { SentimentResponse } from "../../types";
-import { API_KEY, API_URL } from "@env";
-import { RemoteSentiments } from "@/data/use-cases/remote-sentiments";
-import { RemoteHttpPostClient } from "@/data/use-cases/http-post-client";
-import { SentimentsParams } from "@/domain/use-cases";
+import { API_KEY } from "@env";
+import { useRemoteSentiments } from "@/domain/use-cases/remote-sentiments";
+import "reflect-metadata";
 
 export const Home = () => {
-  const [score, setScore] = useState<Sentiment | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const { score, postSentiments } = useRemoteSentiments();
 
   const handleSendMessage = async () => {
     try {
@@ -31,16 +28,7 @@ export const Home = () => {
       formData.append("txt", message);
       formData.append("lang", "pt");
 
-      const httpPostClient = new RemoteHttpPostClient<
-        SentimentsParams,
-        SentimentResponse
-      >();
-
-      const remoteSentiments = new RemoteSentiments(API_URL, httpPostClient);
-
-      const response = await remoteSentiments.postSentiments(formData);
-
-      setScore(response.score_tag);
+      await postSentiments(formData);
     } catch (error) {
     } finally {
       setIsLoading(false);

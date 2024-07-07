@@ -1,1 +1,1 @@
-export * from "./sentiments";
+export * from "../../data/protocols/http/sentiments.data-source";

@@ -1,11 +1,9 @@
-import { Sentiment } from "../utils/sentiments";
-
 export interface SentimentResponse {
   agreement: string;
   confidence: string;
   irony: string;
   model: string;
-  score_tag: Sentiment;
+  score_tag: "P+" | "P" | "NEU" | "N" | "N+" | "NONE";
   sentence_list: SentenceList[];
   sentimented_concept_list: any[];
   sentimented_entity_list: any[];

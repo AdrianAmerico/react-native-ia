@@ -1,6 +1,10 @@
 {
   "extends": "expo/tsconfig.base",
-
+  "emitDecoratorMetadata": true,
+  "experimentalDecorators": true,
+  "strictPropertyInitialization": false,
+  "lib": ["es6", "dom"],
+  "types": ["reflect-metadata"],
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]

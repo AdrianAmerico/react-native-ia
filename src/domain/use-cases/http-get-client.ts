@@ -1,6 +1,6 @@
 import axios from "axios";
-import { HttpPostClientParams, HTTPResponse } from "../protocols/http";
-import { HTTPGetClient } from "../protocols/http/http-get-client";
+import { HttpPostClientParams, HTTPResponse } from "../../data/protocols/http";
+import { HTTPGetClient } from "../../data/protocols/http/http-get-client";
 
 export class RemoteHttpGetClient<T> implements HTTPGetClient<T> {
   async get(params: HttpPostClientParams<T>): Promise<HTTPResponse<T>> {

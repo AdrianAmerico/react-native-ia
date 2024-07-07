@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { Home } from "./src/screens/home";
+import "reflect-metadata";
 
 export default function App() {
   return (

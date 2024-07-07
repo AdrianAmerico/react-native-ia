@@ -1,4 +1,4 @@
-export const sentiments = {
+export const sentimentsList = {
   "P+": {
     emoji: "😁",
     name: "Muito Positivo",
@@ -24,5 +24,3 @@ export const sentiments = {
     name: "Indefinido",
   },
 };
-
-export type Sentiment = keyof typeof sentiments;

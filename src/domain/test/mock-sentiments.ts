@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker";
-import { SentimentsParams } from "../use-cases/sentiments";
+import { SentimentsParams } from "../../data/protocols/http/sentiments.data-source";
 import { SentimentResponse } from "@/types";
-import { sentiments } from "@/utils";
 
 export const mockSentiments = (): SentimentsParams => {
   const formData = new FormData();
@@ -19,7 +18,8 @@ export const mockSentimentsResponse = (): SentimentResponse => ({
   confidence: faker.lorem.word(),
   irony: faker.lorem.word(),
   model: faker.lorem.word(),
-  score_tag: sentiments.p.name as keyof typeof sentiments,
+  // score_tag: sentiments.p.name as keyof typeof sentiments,
+  score_tag: "NONE",
   sentence_list: [],
   sentimented_concept_list: [],
   sentimented_entity_list: [],

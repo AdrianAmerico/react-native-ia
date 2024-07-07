@@ -3,7 +3,7 @@ import {
   HttpPostClient,
   HttpPostClientParams,
   HTTPResponse,
-} from "../protocols/http";
+} from "../../data/protocols/http";
 
 export class RemoteHttpPostClient<T, R> implements HttpPostClient<T, R> {
   async post(params: HttpPostClientParams<T>): Promise<HTTPResponse<R>> {
